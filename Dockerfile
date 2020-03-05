@@ -1,5 +1,11 @@
 FROM jupyter/minimal-notebook
 
+# Switch from joyvan to root
+USER root
+
+# This prevents an error
+ENV XDG_RUNTIME_DIR=""
+
 # To make it easier for build and release pipelines to run apt-get,
 # configure apt to not require confirmation (assume the -y argument by default)
 ENV DEBIAN_FRONTEND=noninteractive
@@ -7,7 +13,7 @@ RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
 # Make sure that we can download libicu55
 RUN apt-get update && \
-        apt-get install software-properties-common && \
+        apt-get install -y software-properties-common && \
         add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main" && \
         apt-get update
 
