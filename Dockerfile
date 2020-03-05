@@ -23,6 +23,7 @@ RUN apt-get update \
         curl \
         jq \
         git \
+        git-lfs \
         iputils-ping \
         libcurl4 \
         libicu55 \
