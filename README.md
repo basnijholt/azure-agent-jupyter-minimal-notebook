@@ -3,7 +3,7 @@ An agent for Azure Pipelines using jupyter/minimal-notebook as a base
 
 Build with
 ```
-docker build --tag=azure-agent-jupyter-minimal-notebook:latest .
+docker build --tag=basnijholt/azure-agent-jupyter-minimal-notebook:latest .
 ```
 
 Run with
