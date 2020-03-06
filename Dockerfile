@@ -17,18 +17,27 @@ RUN apt-get update && \
         add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main" && \
         apt-get update
 
+# Install Azure Agent deps
 RUN apt-get update \
 && apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \
         jq \
         git \
-        git-lfs \
         iputils-ping \
         libcurl4 \
         libicu55 \
         libunwind8 \
         netcat
+
+# Because of https://github.com/git-lfs/git-lfs/issues/3571 the git-lfs from apt-get isn't good enough
+RUN conda install --yes git git-lfs
+
+# Set git-lfs settings globally (otherwise only refs are cloned)
+RUN git config --global --add filter.lfs.required true && \
+        git config --global --add filter.lfs.smudge "git-lfs smudge -- %f" && \
+        git config --global --add filter.lfs.process "git-lfs filter-process" && \
+        git config --global --add filter.lfs.clean "git-lfs clean -- %f"
 
 WORKDIR /azp
 
