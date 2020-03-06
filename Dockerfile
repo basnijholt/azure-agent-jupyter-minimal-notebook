@@ -20,15 +20,15 @@ RUN apt-get update && \
 # Install Azure Agent deps
 RUN apt-get update \
 && apt-get install -y --no-install-recommends \
-        ca-certificates \
-        curl \
-        jq \
-        git \
-        iputils-ping \
-        libcurl4 \
-        libicu55 \
-        libunwind8 \
-        netcat
+       ca-certificates \
+       curl \
+       jq \
+       git \
+       iputils-ping \
+       libcurl4 \
+       libicu55 \
+       libunwind8 \
+       netcat
 
 # Because of https://github.com/git-lfs/git-lfs/issues/3571 the git-lfs from apt-get isn't good enough
 RUN conda install --yes git git-lfs
