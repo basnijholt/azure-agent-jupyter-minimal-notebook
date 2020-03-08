@@ -14,21 +14,25 @@ RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 # Make sure that we can download libicu55
 RUN apt-get update && \
         apt-get install -y software-properties-common && \
-        add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main" && \
-        apt-get update
+        add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
 
 # Install Azure Agent deps
-RUN apt-get update \
-&& apt-get install -y --no-install-recommends \
-       ca-certificates \
-       curl \
-       jq \
-       git \
-       iputils-ping \
-       libcurl4 \
-       libicu55 \
-       libunwind8 \
-       netcat
+RUN apt-get update && \
+        apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        jq \
+        git \
+        iputils-ping \
+        libcurl4 \
+        libicu55 \
+        libunwind8 \
+        netcat
+
+# Install TeX deps such that we can convert `ipynb`s to `pdf`
+RUN apt-get update && \
+        apt-get install -y --no-install-recommends \
+        texlive-xetex texlive-fonts-recommended texlive-generic-recommended
 
 # Because of https://github.com/git-lfs/git-lfs/issues/3571 the git-lfs from apt-get isn't good enough
 RUN conda install --yes git git-lfs
