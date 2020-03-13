@@ -34,6 +34,11 @@ RUN apt-get update && \
         apt-get install -y --no-install-recommends \
         texlive-xetex texlive-fonts-recommended texlive-generic-recommended
 
+# Others
+RUN apt-get update && \
+        apt-get install -y --no-install-recommends \
+        ssh rsync
+
 # Because of https://github.com/git-lfs/git-lfs/issues/3571 the git-lfs from apt-get isn't good enough
 RUN conda install --yes git git-lfs
 
